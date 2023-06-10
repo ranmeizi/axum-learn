@@ -16,6 +16,7 @@ serde_json = { workspace = true }
 
 [workspace.dependencies]
 axum = "0"
+axum-extra = "0"
 tokio = { version="1",features=["full"]}
 dotenvy = "0"
 serde = { version = "1", features=["derive"] }
