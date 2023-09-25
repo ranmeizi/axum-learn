@@ -1,5 +1,7 @@
 use axum::{routing::get, Router};
 use std::env;
+use sea_orm::DatabaseConnection;
+use common::db_conn;
 
 mod blog;
 mod routes;
@@ -10,7 +12,7 @@ pub async fn start() {
     let port = env::var("PORT").expect("PORT is not set in file .env");
 
     let state = AppState {
-        name : String::from("axum-learn")
+        db : db_conn::get_db_conn().await
     };
 
     // build our application with a single route
@@ -26,7 +28,7 @@ pub async fn start() {
 #[derive(Debug, Clone)]
 pub struct AppState {
     // dbconnection:
-    name: String,
+    db: DatabaseConnection,
 }
 
 type StateRouter = Router<AppState>;
